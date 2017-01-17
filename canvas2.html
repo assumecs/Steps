@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+	<div style="padding: 10px;">
+    	<canvas style="border:1px solid white" width="540" height="320"></canvas>
+	</div>
+</body>
+<script>
+//获取canvas的dom元素  
+var cvs = document.querySelector("canvas");
+//创建绘制环境  
+var cxt = cvs.getContext("2d");
+/*  
+ * constructor { LineChart } 折线图构造函数  
+ * param { ctx: Context } 绘图上下文  
+ * param { paddingArr: Array } 折线图到画布四边的距离，存储顺序为上右下左  
+ * param { arrowArr: Array } 折线图中箭头的宽和高  
+ * param { data: Array } 存储了折线图中所需的数据  
+ * */
+function LineChart(ctx, padding, data) {
+    this.ctx = ctx;
+    this.padding = padding;
+    this.data = data.sort(function(a, b){
+    	return a.date > b.date;
+    });
+
+    //计算上顶点的距离  
+    this.vertexTop = {
+        x: this.padding,
+        y: this.padding
+    };
+    //计算原点的距离  
+    this.origin = {
+        x: this.padding,
+        y: this.ctx.canvas.height - this.padding
+    };
+    //计算右边点的距离  
+    this.vertexRight = {
+        x: this.ctx.canvas.width - this.padding,
+        y: this.ctx.canvas.height - this.padding
+    };
+    this.process();
+}
+
+LineChart.prototype = {
+    //设置构造函数  
+    constructor: LineChart,
+    //绘制边框
+    drawBorder: function() {
+    	//"#19BD82" "#1494A4";
+    	var grd = this.ctx.createLinearGradient(this.origin.x,this.origin.y,this.vertexRight.x,this.vertexRight.y);
+    	grd.addColorStop(0, "#19BD82");
+    	grd.addColorStop(1, "#1494A4");
+    	this.ctx.fillStyle = grd;
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, this.padding);
+        //左上
+        this.ctx.arcTo(0, 0, this.padding, 0, this.padding);
+        this.ctx.lineTo(this.ctx.canvas.width - this.padding, 0);
+        //右上
+        this.ctx.arcTo(this.ctx.canvas.width, 0, this.ctx.canvas.width, this.padding, this.padding);
+        this.ctx.lineTo(this.ctx.canvas.width, this.ctx.canvas.height - this.padding);
+        //右下
+        this.ctx.arcTo(this.ctx.canvas.width, this.ctx.canvas.height, this.ctx.canvas.width - this.padding, this.ctx.canvas.height,  this.padding);
+        this.ctx.lineTo(this.padding, this.ctx.canvas.height);
+        //左下
+        this.ctx.arcTo(0, this.ctx.canvas.height, 0, this.ctx.canvas.height - this.padding,  this.padding);
+        this.ctx.lineTo(0, this.padding);
+
+        // this.ctx.stroke();
+        this.ctx.fill();
+    },
+
+    //绘制基准线
+    drawBaseLine: function() {
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "#3ABEB0";
+        this.ctx.translate(this.padding * 2, this.ctx.canvas.height/5);
+        this.ctx.moveTo(0,0.5);
+        this.ctx.lineTo(this.ctx.canvas.width - this.padding * 4, 0.5);
+        this.ctx.stroke();
+        this.ctx.restore();
+
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "#3ABEB0";
+        this.ctx.translate(this.padding * 2, this.ctx.canvas.height * 5/6);
+        this.ctx.moveTo(0,0.5);
+        this.ctx.lineTo(this.ctx.canvas.width - this.padding * 4, 0.5);
+        this.ctx.stroke();
+        this.ctx.restore();
+    },
+
+    drawText: function(){
+    	//步数
+    	this.ctx.font = this.ctx.canvas.height/8 + "px " + this.ctx.font.split(' ')[1];
+    	this.ctx.fillStyle = "white"
+    	this.ctx.fillText("步数", this.padding * 3, this.ctx.canvas.height/5 - this.padding);
+    	//当日步数
+    	this.ctx.font = this.ctx.canvas.height/6 + "px " + this.ctx.font.split(' ')[1];
+    	this.ctx.textAlign = "right";
+    	this.ctx.fillText(this.data.lastStep, this.ctx.canvas.width - this.padding * 3, this.ctx.canvas.height/5 - this.padding);
+    },
+
+    drawData: function(){
+    	//数据
+    },
+
+    process: function() {
+        // this.processData = [];
+        // //在这一部分将画布认识的坐标转化为本坐标系的坐标  
+        // for (var i = 0; i < this.data.length; i += 2) {
+        //     this.processData.push(this.origin.x + this.data[i]);
+        //     this.processData.push(this.origin.y - this.data[i + 1]);
+        // };
+
+        //取当日，最大，最小等值
+        this.data.lastStep = this.data[this.data.length - 1].step;
+        this.data.max = this.data.min = this.data.lastStep;
+        for(var a = 0; a < this.data.length; a++){
+        	if(this.data.max < this.data[a].step)
+        		this.data.max = this.data[a].step;
+        	if(this.data.min > this.data[a].step)
+        		this.data.min = this.data[a].step;
+        }
+        //确定1w基准线位置
+        var perLine;
+        if(this.data.max < 10000){
+        	perLine = 3/5;
+        }else if(this.data.max < 20000){
+        	perLine = 5/7;
+        } else if(this.data.max < 30000){
+        	perLine = 1/3;
+        }
+        var perX = this.ctx.canvas.height * 3/5 * perLine;
+        var perY = this.ctx.canvas.width/6 - this.padding;
+        //确定各点的相对坐标(以第一天，值为0为远点)
+        this.points = [];
+        for(var i = 0; i < this.data.length; i++){
+        	var point = {
+        		x: i * perY,
+        		y: -this.data[i].step * perX / 10000
+        	};
+        	this.points.push(point);
+        }
+        console.log(this.points);
+    },
+
+    drawOrcle: function() {
+        this.ctx.beginPath();
+        for (var i = 0; i < this.processData.length; i += 2) {
+            this.ctx.arc(this.processData[i], this.processData[i + 1], 5, 0, Math.PI * 2);
+            this.ctx.fill();
+
+        };
+    },
+
+    drawLine: function() {
+        this.ctx.beginPath();
+        for (var i = 0; i < this.processData.length; i += 2) {
+            this.ctx.lineTo(this.processData[i], this.processData[i + 1]);
+        };
+        this.ctx.stroke();
+
+    },
+    draw: function() {
+        this.drawBorder();
+        this.drawBaseLine();
+        this.drawText();
+        this.drawData();
+        // this.drawOrcle();
+        // this.drawLine();
+    }
+};
+
+var json = '[{"date":"2017-01-13","step":"3819"},{"date":"2017-01-12","step":"7259"},{"date":"2017-01-11","step":"7716"},{"date":"2017-01-10","step":"6846"},{"date":"2017-01-09","step":"8778"},{"date":"2017-01-08","step":"7822"},{"date":"2017-01-07","step":"1418"}]';
+var data = JSON.parse(json);
+var linechat = new LineChart(cxt, 10, data);
+linechat.draw();
+</script>
+
+</html>
