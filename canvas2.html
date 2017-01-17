@@ -15,16 +15,16 @@
 	</div>
 </body>
 <script>
-//获取canvas的dom元素  
+//获取canvas的dom元素
 var cvs = document.querySelector("canvas");
-//创建绘制环境  
+//创建绘制环境
 var cxt = cvs.getContext("2d");
-/*  
- * constructor { LineChart } 折线图构造函数  
- * param { ctx: Context } 绘图上下文  
- * param { paddingArr: Array } 折线图到画布四边的距离，存储顺序为上右下左  
- * param { arrowArr: Array } 折线图中箭头的宽和高  
- * param { data: Array } 存储了折线图中所需的数据  
+/*
+ * constructor { LineChart } 折线图构造函数
+ * param { ctx: Context } 绘图上下文
+ * param { paddingArr: Array } 折线图到画布四边的距离，存储顺序为上右下左
+ * param { arrowArr: Array } 折线图中箭头的宽和高
+ * param { data: Array } 存储了折线图中所需的数据
  * */
 function LineChart(ctx, padding, data) {
     this.ctx = ctx;
@@ -33,17 +33,17 @@ function LineChart(ctx, padding, data) {
     	return a.date > b.date;
     });
 
-    //计算上顶点的距离  
+    //计算上顶点的距离
     this.vertexTop = {
         x: this.padding,
         y: this.padding
     };
-    //计算原点的距离  
+    //计算原点的距离
     this.origin = {
         x: this.padding,
         y: this.ctx.canvas.height - this.padding
     };
-    //计算右边点的距离  
+    //计算右边点的距离
     this.vertexRight = {
         x: this.ctx.canvas.width - this.padding,
         y: this.ctx.canvas.height - this.padding
@@ -52,7 +52,7 @@ function LineChart(ctx, padding, data) {
 }
 
 LineChart.prototype = {
-    //设置构造函数  
+    //设置构造函数
     constructor: LineChart,
     //绘制边框
     drawBorder: function() {
@@ -116,9 +116,13 @@ LineChart.prototype = {
     	//数据
     },
 
+    drawPoint: function(point){
+      // this.ctx
+    },
+
     process: function() {
         // this.processData = [];
-        // //在这一部分将画布认识的坐标转化为本坐标系的坐标  
+        // //在这一部分将画布认识的坐标转化为本坐标系的坐标
         // for (var i = 0; i < this.data.length; i += 2) {
         //     this.processData.push(this.origin.x + this.data[i]);
         //     this.processData.push(this.origin.y - this.data[i + 1]);
