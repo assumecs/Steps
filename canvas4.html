@@ -1,0 +1,37 @@
+<!DOCTYPE HTML> 
+<html> 
+<body> 
+<canvas id="myCanvas" width="500" height="500" >your browser does not support the canvas tag </canvas> 
+<script type="text/javascript"> 
+  var canvas = document.getElementById('myCanvas'); 
+  var ctx = canvas.getContext("2d"); 
+  var dx=0; 
+  //设置字体样式 
+  ctx.font = "40px Courier New"; 
+  ctx.textBaseline="top";  
+  var metrics = ctx.measureText("Html5Canvas"); 
+  var textWidth = metrics.width; 
+
+  
+  function drawRect(){ 
+      ctx.lineWidth=3; 
+      ctx.strokeText("Html5Canvas", 50, 50); 
+      ctx.lineWidth=1; 
+      ctx.strokeRect(50,50,textWidth,50); 
+      ctx.globalAlpha=0.5; 
+      ctx.fillStyle="green"; 
+      ctx.fillRect(50,50,dx,50); 
+       dx+=textWidth/10; 
+      if(dx>=textWidth+textWidth/10) dx=0; 
+   } 
+  
+  loop = setInterval(function () { 
+    //beginTag = true; 
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    drawRect(); 
+  }, 500); 
+
+</script> 
+
+</body> 
+</html>
