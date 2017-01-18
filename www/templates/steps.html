@@ -1,0 +1,74 @@
+<ion-view view-title="Recent">
+  <ion-content class="has-header" overflow-scroll="true" style="overflow:auto;">
+    <div class="" style="padding:10px;">
+      <div class="tips" ng-show="vo.message" ng-bind="vo.message"></div>
+        <button type="button" class="button button-block button-promary" ng-click="vc.getSteps()">获取计步列表</button>
+        <div class="chart-container" ng-show="vo.options">
+            <chart ng-model="vo.options" type="" class="chart" style=""></chart>
+        </div>
+
+        <div class="list">
+          <div class="item row" >
+            <div class="col col-50" >日期</div>
+            <div class="col col-50" >步数</div>
+          </div>
+          <div class="item row" ng-repeat="item in vo.stepEntries">
+            <div class="col col-50" ng-bind="item.date"></div>
+            <div class="col col-50" ng-bind="item.step"></div>
+          </div>
+        </div>
+        <div class="">
+          <canvas id="canvas" class="chart"></canvas>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>
+<style media="screen">
+@media only screen and (min-width:320px) {
+    .chart-container {
+        margin: -10px auto;
+    }
+    .chart {
+        width: 320px;height: 250px;
+    }
+}
+
+@media only screen and (min-width:375px) {
+    .chart-container {
+        margin: -15px auto;
+    }
+    .chart {
+        width: 375px;height: 292px;
+    }
+}
+
+@media only screen and (min-width:414px) {
+    .chart-container {
+        margin: -20px auto;
+    }
+    .chart {
+        width: 414px;height: 323px;
+    }
+}
+.score-head {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+}
+
+.score-head img {
+    height: 18px;
+    width: 100px;
+}
+
+.score-circle {
+    width: 8rem;
+    height: 8rem;
+    margin: 10px auto;
+    padding: 2rem 0;
+    line-height: 1.5rem;
+    color: #888;
+    background-repeat: round;
+    background-image: url(img/score_circle.png);
+}
+</style>

@@ -1,0 +1,80 @@
+2017年1月5日 下午6:46:36 - SensorListener onCreate
+2017年1月5日 下午6:46:36 - updateSteps 1483545600000 / 96959895
+2017年1月5日 下午6:46:36 - date	| steps	| 
+2017年1月5日 下午6:46:36 - 1483545600000	| 96959895	| 
+2017年1月5日 下午6:46:36 - onSensorChanged saveStepstrue
+2017年1月5日 下午6:46:36 - re-register sensor listener
+2017年1月5日 下午6:46:36 - step sensors: 1
+2017年1月5日 下午6:46:36 - default: huawei step counter
+2017年1月5日 下午7:00:05 - SensorListener onCreate
+2017年1月5日 下午7:00:05 - updateSteps 1483545600000 / 96959895
+2017年1月5日 下午7:00:05 - date	| steps	| 
+2017年1月5日 下午7:00:05 - 1483545600000	| 96959895	| 
+2017年1月5日 下午7:00:05 - onSensorChanged saveStepstrue
+2017年1月5日 下午7:00:05 - re-register sensor listener
+2017年1月5日 下午7:00:05 - step sensors: 1
+2017年1月5日 下午7:00:05 - default: huawei step counter
+2017年1月5日 下午7:21:22 - SensorListener onCreate
+2017年1月5日 下午7:21:22 - updateSteps 1483545600000 / 96960888
+2017年1月5日 下午7:21:22 - date	| steps	| 
+2017年1月5日 下午7:21:22 - 1483545600000	| 96960888	| 
+2017年1月5日 下午7:21:22 - onSensorChanged saveStepstrue
+2017年1月5日 下午7:21:22 - re-register sensor listener
+2017年1月5日 下午7:21:22 - step sensors: 1
+2017年1月5日 下午7:21:22 - default: huawei step counter
+2017年1月5日 下午7:59:29 - SensorListener onCreate
+2017年1月5日 下午7:59:29 - updateSteps 1483545600000 / 96961613
+2017年1月5日 下午7:59:29 - date	| steps	| 
+2017年1月5日 下午7:59:29 - 1483545600000	| 96961613	| 
+2017年1月5日 下午7:59:29 - onSensorChanged saveStepstrue
+2017年1月5日 下午7:59:29 - re-register sensor listener
+2017年1月5日 下午7:59:29 - step sensors: 1
+2017年1月5日 下午7:59:29 - default: huawei step counter
+2017年1月5日 下午8:02:29 - updateSteps 1483545600000 / 96961613
+2017年1月5日 下午8:02:29 - date	| steps	| 
+2017年1月5日 下午8:02:29 - 1483545600000	| 96961613	| 
+2017年1月5日 下午8:02:29 - onSensorChanged saveStepstrue
+2017年1月5日 下午8:02:29 - re-register sensor listener
+2017年1月5日 下午8:02:29 - step sensors: 1
+2017年1月5日 下午8:02:29 - default: huawei step counter
+2017年1月5日 下午8:03:30 - SensorListener onCreate
+2017年1月5日 下午8:03:30 - insertDay 1483545600000 / 0
+2017年1月5日 下午8:03:30 - date	| steps	| 
+2017年1月5日 下午8:03:30 - 1483545600000	| 0	| 
+2017年1月5日 下午8:03:30 - onSensorChanged saveStepstrue
+2017年1月5日 下午8:03:30 - re-register sensor listener
+2017年1月5日 下午8:03:30 - step sensors: 1
+2017年1月5日 下午8:03:30 - default: huawei step counter
+2017年1月6日 上午1:03:36 - SensorListener onCreate
+2017年1月6日 上午1:03:36 - insertDay 1483632000000 / 0
+2017年1月6日 上午1:03:36 - date	| steps	| 
+2017年1月6日 上午1:03:36 - 1483632000000	| 0	| 
+2017年1月6日 上午1:03:36 - 1483545600000	| 0	| 
+2017年1月6日 上午1:03:36 - onSensorChanged saveStepstrue
+2017年1月6日 上午1:03:36 - re-register sensor listener
+2017年1月6日 上午1:03:36 - step sensors: 1
+2017年1月6日 上午1:03:36 - default: huawei step counter
+2017年1月6日 上午1:05:39 - updateSteps 1483632000000 / 0
+2017年1月6日 上午1:05:39 - date	| steps	| 
+2017年1月6日 上午1:05:39 - 1483632000000	| 0	| 
+2017年1月6日 上午1:05:39 - 1483545600000	| 0	| 
+2017年1月6日 上午1:05:39 - onSensorChanged saveStepstrue
+2017年1月6日 上午1:05:39 - re-register sensor listener
+2017年1月6日 上午1:05:39 - step sensors: 1
+2017年1月6日 上午1:05:39 - default: huawei step counter
+2017年1月6日 上午1:09:29 - updateSteps 1483632000000 / 0
+2017年1月6日 上午1:09:29 - date	| steps	| 
+2017年1月6日 上午1:09:29 - 1483632000000	| 0	| 
+2017年1月6日 上午1:09:29 - 1483545600000	| 0	| 
+2017年1月6日 上午1:09:29 - onSensorChanged saveStepstrue
+2017年1月6日 上午1:09:29 - re-register sensor listener
+2017年1月6日 上午1:09:29 - step sensors: 1
+2017年1月6日 上午1:09:29 - default: huawei step counter
+2017年1月6日 上午1:09:30 - updateSteps 1483632000000 / 0
+2017年1月6日 上午1:09:30 - date	| steps	| 
+2017年1月6日 上午1:09:30 - 1483632000000	| 0	| 
+2017年1月6日 上午1:09:30 - 1483545600000	| 0	| 
+2017年1月6日 上午1:09:30 - onSensorChanged saveStepstrue
+2017年1月6日 上午1:09:30 - re-register sensor listener
+2017年1月6日 上午1:09:30 - step sensors: 1
+2017年1月6日 上午1:09:30 - default: huawei step counter
