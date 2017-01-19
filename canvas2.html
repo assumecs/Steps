@@ -147,19 +147,38 @@ LineChart.prototype = {
         this.ctx.save();
         this.ctx.translate(this.padding * 2, this.ctx.canvas.height * 5/6 - this.padding/2);
         for(var i = 0; i < this.points.length; i++){
-            this.drawPoint(this.points[i], i === this.points.length-1);
+            this.drawPoint(this.points[i], i);
         }
         this.linkPoints();
         this.drawShadow();
         this.ctx.restore();
     },
 
-    drawPoint: function(point, bigOrNot){
+    drawPoint: function(point, i){
         this.ctx.beginPath();
         this.ctx.fillStyle = "white";
-        this.ctx.arc(point.x, point.y, bigOrNot ? this.bigR : this.littleR, 0, Math.PI * 2);
+        this.ctx.arc(point.x, point.y, i === this.points.length-1 ? this.bigR : this.littleR, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.closePath();
+        this.ctx.fillStyle = "rgba(254, 254, 254, 0.6";
+        this.drawDate(point.x, i);
+    },
+
+    drawDate: function(x, i){
+        var font_size = this.ctx.canvas.height/18;
+        this.ctx.font = font_size + "px " + this.ctx.font.split(' ')[1];
+        var date = new Date(this.data[i].date);
+        var text = "";
+        if(i === 0 || date.getDate() === 1){
+            text = (date.getMonth() + 1) + "月";
+        }
+        text += date.getDate();
+        if(i === 0){
+            this.ctx.textAlign = "left";
+        } else {
+            this.ctx.textAlign = "center";
+        }
+        this.ctx.fillText(text, x, this.padding/2 + this.ctx.canvas.height/18);
     },
 
     linkPoints: function(){
@@ -204,24 +223,41 @@ LineChart.prototype = {
     },
 
     touched: function(offsetY) {
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        var grd = this.ctx.createLinearGradient(this.origin.x,this.origin.y,this.vertexRight.x,this.vertexRight.y);
-        grd.addColorStop(0, "#19BD82");
-        grd.addColorStop(1, "#1494A4");
-        this.ctx.fillStyle = grd;
-
+        var font_size = this.ctx.canvas.height/18;
+        this.ctx.font = font_size + "px " + this.ctx.font.split(' ')[1];
         var index = Math.floor((offsetY - this.padding * 2 + this.perX / 2)/this.perX);
-        // if(index > 6){
-        //     index = 6;
-        // }
-        // this.ctx.save();
-        // this.ctx.translate(this.padding * 2, this.ctx.canvas.height * 5/6 - this.padding/2);
+        this.ctx.textBaseline = 'bottom';
+        if(index === 0){
+            this.ctx.textAlign = "left";
+        } else if (index === this.data.length - 1){
+            this.ctx.textAlign = "right";
+        } else {
+            this.ctx.textAlign = "center";
+        }
+
         var x = this.padding * 2 + this.perX * index;
-        var y = this.ctx.canvas.height/5 + this.padding/2;
-        this.ctx.textBaseline = 'top';
-        this.ctx.textAlign = "center";
-        this.ctx.fillStyle = "rgba(254, 254, 254, 0.8)";
-        this.ctx.fillText(this.data[index].step, x, y);
+        var step = this.data[index].step;
+        var startY = this.ctx.canvas.height * 5/6 - this.padding + step / 10000 * this.referLine;
+        var stopY = this.ctx.canvas.height/5 + this.padding/2 + font_size;
+        var trans = Math.abs(startY - stopY);
+        var transStep = 100;
+        var count = 1;
+        var timer = setInterval(function(){
+            if(count <= transStep){
+                linechat.drawStep(step, x, startY - trans * count / transStep, Math.pow(count/transStep, 2)/0.6);
+                count ++;
+            } else {
+                clearInterval(timer);
+            }
+        }, 5);
+        this.ctx.fillStyle = "rgba(254, 254, 254, 1";
+        this.drawDate(x, index);
+    },
+
+    drawStep: function(step, x, y, alpha){
+        this.ctx.fillStyle = "rgba(254, 254, 254, " + alpha + ")";
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.fillText(step, x, y);
     },
 
     process: function() {
@@ -291,7 +327,7 @@ LineChart.prototype = {
     }
 };
 
-var json = '[{"date":"2017-01-13","step":"3819"},{"date":"2017-01-12","step":"17259"},{"date":"2017-01-11","step":"7716"},{"date":"2017-01-10","step":"6846"},{"date":"2017-01-09","step":"8778"},{"date":"2017-01-08","step":"1110"},{"date":"2017-01-07","step":"1418"}]';
+var json = '[{"date":"2017-01-13","step":"3819"},{"date":"2017-01-12","step":"7259"},{"date":"2017-01-11","step":"7716"},{"date":"2017-01-10","step":"6846"},{"date":"2017-01-09","step":"8778"},{"date":"2017-01-08","step":"1110"},{"date":"2017-01-07","step":"1418"}]';
 var data = JSON.parse(json);
 var linechat = new LineChart(cxt, 10, data);
 linechat.draw();
