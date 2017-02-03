@@ -178,6 +178,7 @@ LineChart.prototype = {
         } else {
             this.ctx.textAlign = "center";
         }
+        console.log('y',this.padding/2 + this.ctx.canvas.height/18);
         this.ctx.fillText(text, x, this.padding/2 + this.ctx.canvas.height/18);
     },
 
@@ -223,6 +224,12 @@ LineChart.prototype = {
     },
 
     touched: function(offsetY) {
+        // this.drawData();
+        // if(1){return;}
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.save();
+        this.ctx.translate(this.padding * 2, this.ctx.canvas.height * 5/6 - this.padding/3);
+
         var font_size = this.ctx.canvas.height/18;
         this.ctx.font = font_size + "px " + this.ctx.font.split(' ')[1];
         var index = Math.floor((offsetY - this.padding * 2 + this.perX / 2)/this.perX);
@@ -235,28 +242,30 @@ LineChart.prototype = {
             this.ctx.textAlign = "center";
         }
 
-        var x = this.padding * 2 + this.perX * index;
+        var x = this.perX * index;
         var step = this.data[index].step;
-        var startY = this.ctx.canvas.height * 5/6 - this.padding + step / 10000 * this.referLine;
-        var stopY = this.ctx.canvas.height/5 + this.padding/2 + font_size;
+        var startY = this.ctx.canvas.height * 5/6 - this.padding + step / 10000 * this.referLine - (this.ctx.canvas.height * 5/6 - this.padding/2);
+        var stopY = this.ctx.canvas.height/5 + this.padding/2 + font_size - (this.ctx.canvas.height * 5/6 - this.padding/2);
         var trans = Math.abs(startY - stopY);
         var transStep = 100;
         var count = 1;
+        this.ctx.fillStyle = "rgba(254, 254, 254, 1";
+        this.drawDate(x, index);
         var timer = setInterval(function(){
             if(count <= transStep){
                 linechat.drawStep(step, x, startY - trans * count / transStep, Math.pow(count/transStep, 2)/0.6);
                 count ++;
             } else {
                 clearInterval(timer);
+                linechat.ctx.restore();
             }
         }, 5);
-        this.ctx.fillStyle = "rgba(254, 254, 254, 1";
-        this.drawDate(x, index);
     },
 
     drawStep: function(step, x, y, alpha){
         this.ctx.fillStyle = "rgba(254, 254, 254, " + alpha + ")";
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, -this.ctx.canvas.height);
+        // this.ctx.clearRect(0, -this.ctx.canvas.height * 4/5, this.ctx.canvas.width - this.padding / 6, 0);
         this.ctx.fillText(step, x, y);
     },
 
@@ -335,8 +344,8 @@ canvas_front.style.display="block";
 var context = canvas_front.getContext("2d");
 linechat.changeContext(context);
 canvas_front.onmouseup = function(position){
-    console.log(this.left);
-    console.log(position);
+    // console.log(this.left);
+    // console.log(position);
     var point = JSON.stringify(position);
     var str = "clientX: " + position.clientX + ", clientY: " + position.clientY + ", offsetX: " + position.offsetX + ", offsetY: " + position.offsetY;
     showPoint.innerHTML = "mouse" + point + str;
