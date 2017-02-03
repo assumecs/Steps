@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'oc.lazyLoad'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -72,6 +72,19 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  .state('app.slide', {
+    url: '/slide',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/slide.html',
+        controller: 'slideCtrl'
+      }
+    },
+    resolve:['$ocLazyLoad', function($ocLazyLoad){
+      return $ocLazyLoad.load('js/slide.js');
+    }]
+  })
+
   .state('app.steps', {
     url: '/steps',
     views: {
@@ -79,7 +92,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/steps.html',
         controller: 'stepsCtrl'
       }
-    }
+    },
+    resolve:['$ocLazyLoad', function($ocLazyLoad){
+      return $ocLazyLoad.load('js/steps.js');
+    }]
   })
 
   .state('app.today', {
@@ -89,7 +105,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/today.html',
         controller: 'stepsCtrl'
       }
-    }
+    },
+    resolve:['$ocLazyLoad', function($ocLazyLoad){
+      return $ocLazyLoad.load('js/steps.js');
+    }]
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/today');

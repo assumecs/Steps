@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style id= "css">
+.container{
+    background-color: rgba(251,128,64, 0.6);
+    /*-webkit-transform:rotate(180deg);*/
+    padding: 0px 0;
+}
+#wrap{
+    width:200px;height: 200px;position: relative;border-radius: 50%;
+    border:0px solid black;margin: 100px auto;padding: 100px 0;
+}
+#wrap ul{
+    margin:0px;padding: 0px;height: 200px;list-style: none;position: relative;
+}
+#wrap ul li {
+    width: 5px; height: 5px; background: rgba(251,128,64, 0.9);position: absolute;left: 98px;top: 0px; -webkit-transform-origin:center 100px; border-radius: 50%;
+}
+/*#wrap ul li:last-child {
+    width: 5px; height: 5px; background: url(./foot.png);position: absolute;left: 98px;top: 0px; -webkit-transform-origin:center 100px; border-radius: 0;
+    background-position:right bottom; 
+}*/
+/*#wrap ul li:nth-of-type(5n+1){width:4px; height:4px;background:#000;}*/
+#wrap ul li.passed{background:white;}
+#wrap ul li img{
+    filter: invert(100%);
+    width:400%; height:400%;margin-left: -5px;margin-top: -25px;
+}
+#hour{
+    width: 6px;height: 45px;background: #000;position: absolute; left: 97px;top: 155px;-webkit-transform-origin:bottom;
+}
+#min{
+    width: 4px;height: 65px;background: #999;position: absolute; left: 98px;top: 135px;-webkit-transform-origin:bottom;
+}
+#sec{
+    width: 2px;height: 80px;background: red;position: absolute; left: 99px;top: 120px;-webkit-transform-origin:bottom;
+}
+#icon{
+    width:10px;height: 10px;background: #000;position:absolute;border-radius: 50%;left: 95px;top:195px;
+}
+</style>
+<script src="js/jQuery-2.1.4.min.js"></script>
+<script>
+    window.onload = function (){
+        var oList = document.getElementById("list");
+        var aLi = "";
+        var oHour = document.getElementById("hour");
+        var oMin = document.getElementById("min");
+        var oSec = document.getElementById("sec");
+        for(var i = 0; i < 60; i++)
+        {
+             
+            aLi +="<li style='-webkit-transform:rotate("+6*i+"deg)'></li>";
+ 
+        }
+        aLi +="<li><img src='foot.png' style='-webkit-transform:rotate(90deg)'></li>";
+        oList.innerHTML = aLi;
+        setInterval( function(){
+            toTime(oHour,oMin,oSec);
+        },1000);
+     
+ 
+        function toTime(oHour,oMin,oSec)
+        {
+            var oDate=new Date();
+            var iSec=oDate.getSeconds();
+            var iMin=oDate.getMinutes()+iSec/60;
+            var iHour=(oDate.getHours()%12)+iMin/60;
+            oSec.style.WebkitTransform="rotate("+(iSec*360/60)+"deg)";
+            oMin.style.WebkitTransform="rotate("+(iMin*360/60)+"deg)";
+            oHour.style.WebkitTransform="rotate("+(iHour*360/12)+"deg)";
+
+            $('#wrap ul li').attr('class', '');
+            $('#wrap ul li:nth-child(-n+'+ (1 + iSec) +')').attr('class', 'passed');
+            $('#wrap ul li:last-child').css('-webkit-transform', 'rotate('+(iSec*360/60)+'deg)');
+            // for(var i = 0; i < iSec; i++){
+            //     aLi +="<li style='-webkit-transform:rotate("+6*i+"deg)'></li>";
+            // }
+        }
+ 
+    }
+</script>
+</head>
+    <body>
+        <div class="container">
+            <div id = "wrap">
+                <ul id = "list">
+                </ul
+            </div>
+            <div id="hour"></div>
+            <div id="min"></div>
+            <div id="sec"></div>
+            <div id="icon"></div>
+        </div>
+    </body>
+</html>
