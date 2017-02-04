@@ -5,41 +5,42 @@
 <title>无标题文档</title>
 <style id= "css">
 .container{
-    background-color: rgba(251,128,64, 0.6);
-    /*-webkit-transform:rotate(180deg);*/
+    -webkit-transform:rotate(180deg);
     padding: 0px 0;
 }
 #wrap{
+    background-color: rgba(251,128,64, 0.6);
     width:200px;height: 200px;position: relative;border-radius: 50%;
-    border:0px solid black;margin: 100px auto;padding: 100px 0;
+    border:0px solid black;margin: 100px auto;padding: 0 0;
 }
 #wrap ul{
     margin:0px;padding: 0px;height: 200px;list-style: none;position: relative;
 }
 #wrap ul li {
-    width: 5px; height: 5px; background: rgba(251,128,64, 0.9);position: absolute;left: 98px;top: 0px; -webkit-transform-origin:center 100px; border-radius: 50%;
+    width: 5px; height: 5px; background: rgba(251,128,64, 0.9);position: absolute;left: 98px;top: 5px; -webkit-transform-origin:center 95px; border-radius: 50%;
 }
-/*#wrap ul li:last-child {
+#wrap ul li:last-child {
     width: 5px; height: 5px; background: url(./foot.png);position: absolute;left: 98px;top: 0px; -webkit-transform-origin:center 100px; border-radius: 0;
     background-position:right bottom; 
-}*/
+}
 /*#wrap ul li:nth-of-type(5n+1){width:4px; height:4px;background:#000;}*/
 #wrap ul li.passed{background:white;}
 #wrap ul li img{
     filter: invert(100%);
-    width:400%; height:400%;margin-left: -5px;margin-top: -25px;
+    width:400%; height:400%;
+    margin-left: -5px;margin-top: -2px;
 }
 #hour{
-    width: 6px;height: 45px;background: #000;position: absolute; left: 97px;top: 155px;-webkit-transform-origin:bottom;
+    width: 6px;height: 45px;background: #000;position: absolute; left: 97px;top: 155px;-webkit-transform-origin:bottom;display: none;
 }
 #min{
-    width: 4px;height: 65px;background: #999;position: absolute; left: 98px;top: 135px;-webkit-transform-origin:bottom;
+    width: 4px;height: 65px;background: #999;position: absolute; left: 98px;top: 135px;-webkit-transform-origin:bottom;display: none;
 }
 #sec{
-    width: 2px;height: 80px;background: red;position: absolute; left: 99px;top: 120px;-webkit-transform-origin:bottom;
+    width: 2px;height: 80px;background: red;position: absolute; left: 99px;top: 120px;-webkit-transform-origin:bottom;display: none;
 }
 #icon{
-    width:10px;height: 10px;background: #000;position:absolute;border-radius: 50%;left: 95px;top:195px;
+    width:10px;height: 10px;background: #000;position:absolute;border-radius: 50%;left: 95px;top:195px;display: none;
 }
 </style>
 <script src="js/jQuery-2.1.4.min.js"></script>
@@ -56,7 +57,7 @@
             aLi +="<li style='-webkit-transform:rotate("+6*i+"deg)'></li>";
  
         }
-        aLi +="<li><img src='foot.png' style='-webkit-transform:rotate(90deg)'></li>";
+        aLi +="<li><img src='img/foot.png' style='-webkit-transform:rotate(90deg)'></li>";
         oList.innerHTML = aLi;
         setInterval( function(){
             toTime(oHour,oMin,oSec);

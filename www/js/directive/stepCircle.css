@@ -1,0 +1,51 @@
+#wrap{
+    width:200px;height: 200px;position: relative;border-radius: 50%;
+    border:0px solid black;margin: 100px auto;padding: 0 0;
+}
+#wrap ul{
+    margin:0px;padding: 0px;height: 200px;list-style: none;position: relative;
+}
+#wrap ul li {
+    width: 5px; height: 5px; background: rgba(251,128,64, 0.9);position: absolute;left: 98px;top: 5px; -webkit-transform-origin:center 95px; border-radius: 50%;
+}
+#wrap ul li:last-child {
+    width: 5px; height: 5px; background: transparent;position: absolute;left: 98px;top: 0px; -webkit-transform-origin:center 100px; border-radius: 0;
+    background-position:right bottom;
+}
+#wrap ul li.passed{background:white;}
+#wrap ul li img{
+    filter: invert(100%);
+    width:400%; height:400%;
+    margin-left: -5px;margin-top: -2px;
+}
+
+.container{
+  width:200px;
+  height: 200px;
+  position: relative;
+  -webkit-transform:rotate(180deg);
+  padding: 0px 0;
+  background-color: rgba(251,128,64, 0.8);
+}
+.in-circle {
+  -webkit-transform:rotate(180deg);
+  top: 50px;
+  left: 50px;
+  position:absolute;
+  height: 100px;
+  width: 100px;
+  color:white;
+  text-align:center;
+  line-height: 2em;
+  padding: 0.5em;
+  <!-- background: rgba(245, 245, 245, 0.2); -->
+}
+.step-circle-head{
+  font-size: 0.8em;
+}
+.step-circle-step{
+  font-size: 2em;
+}
+.step-circle-target{
+  font-size: 0.7em;
+}

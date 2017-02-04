@@ -81,7 +81,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'oc.lazyLoad'])
       }
     },
     resolve:['$ocLazyLoad', function($ocLazyLoad){
-      return $ocLazyLoad.load('js/slide.js');
+      return $ocLazyLoad.load([
+        'js/jQuery-2.1.4.min.js',
+        'js/directive/stepCircle.js',
+        'js/slide.js',
+      ]);
     }]
   })
 
@@ -107,7 +111,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'oc.lazyLoad'])
       }
     },
     resolve:['$ocLazyLoad', function($ocLazyLoad){
-      return $ocLazyLoad.load('js/steps.js');
+      return $ocLazyLoad.load([
+        'js/steps.js',
+      ]);
     }]
   });
   // if none of the above states are matched, use this as the fallback
