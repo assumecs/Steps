@@ -74,6 +74,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'oc.lazyLoad'])
 
   .state('app.slide', {
     url: '/slide',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/slide.html',
