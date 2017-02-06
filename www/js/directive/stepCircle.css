@@ -1,6 +1,6 @@
 #wrap{
     width:200px;height: 200px;position: relative;border-radius: 50%;
-    border:0px solid black;margin: 100px auto;padding: 0 0;
+    border:0px solid black;padding: 0 0;
 }
 #wrap ul{
     margin:0px;padding: 0px;height: 200px;list-style: none;position: relative;
@@ -24,8 +24,9 @@
   height: 200px;
   position: relative;
   -webkit-transform:rotate(180deg);
+  margin: 0px auto;
   padding: 0px 0;
-  background-color: rgba(251,128,64, 0.8);
+  /*background-color: rgba(251,128,64, 0.8);*/
 }
 .in-circle {
   -webkit-transform:rotate(180deg);

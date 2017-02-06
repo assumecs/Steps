@@ -72,21 +72,53 @@ angular.module('starter', ['ionic', 'starter.controllers', 'oc.lazyLoad'])
     }
   })
 
-  .state('app.slide', {
-    url: '/slide',
+  .state('app.step', {
+    url: '/step',
     cache: false,
     views: {
       'menuContent': {
-        templateUrl: 'templates/slide.html',
-        controller: 'slideCtrl'
+        templateUrl: 'templates/step.html',
+        controller: 'stepCtrl'
       }
     },
+    resolve:['$ocLazyLoad', function($ocLazyLoad){
+      return $ocLazyLoad.load([
+        'js/stepCtrl.js',
+      ]);
+    }]
+  })
+
+  .state('app.step.today', {
+    url: '/today',
+    cache: false,
+    // views: {
+    //   'menuContent': {
+        templateUrl: 'templates/step_today.html',
+        controller: 'slideCtrl'
+    //   }
+    // }
+    ,
     resolve:['$ocLazyLoad', function($ocLazyLoad){
       return $ocLazyLoad.load([
         'js/jQuery-2.1.4.min.js',
         'js/directive/stepCircle.js',
         'js/slide.js',
       ]);
+    }]
+  })
+
+  .state('app.step.total', {
+    url: '/total',
+    // views: {
+    //   'menuContent': {
+        templateUrl: 'templates/step_total.html'
+    //   }
+    // }
+    ,
+    resolve:['$state', function($state){
+      return function(){
+        //   $state.go('app.step.today');
+      };
     }]
   })
 

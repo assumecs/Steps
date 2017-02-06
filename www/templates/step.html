@@ -1,0 +1,38 @@
+<ion-view view-title="健步走">
+  <ion-content class="has-header step-content" overflow-scroll="true" style="overflow:auto;">
+      <div class="row step-head">
+          <div class="col col-25"></div>
+          <div class="col col-25"><div ng-click="vc.toToday()" ng-class="vc.hasToday()?'step-page-curr':'step-page'">今日步数</div><div class="page-point"></div></div>
+          <div class="col col-25"><div ng-click="vc.toTotal()" ng-class="vc.hasToday()?'step-page':'step-page-curr'">累计步数</div><div class="page-point"></div></div>
+          <div class="col col-25"></div>
+      </div>
+      <ion-nav-view></ion-nav-view>
+  </ion-content>
+</ion-view>
+<style media="screen">
+    .step-content{
+        background-color: rgba(251,128,64, 0.8);
+        text-align:center;
+        <!-- color: white; -->
+    }
+    .step-head {
+        margin: 0px auto;
+        padding-bottom: 0px;
+    }
+    .step-head .col {
+        padding-bottom: 0px;
+    }
+    .step-page-curr {
+        color:white;
+    }
+    .step-page {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .step-page-curr+.page-point{
+        display: inline-block;
+        width: 0.5em;
+        height: 0.5em;
+        border-radius: 50%;
+        background-color: white;
+    }
+</style>
